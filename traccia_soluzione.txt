@@ -1,0 +1,62 @@
+input: 
+ - insieme di Esame (PARTENZA)
+ - #CREDITI (m)
+ 
+ OUTPUT
+  - insieme (set) di esame, sottoinsieme di partenza, tale che 
+  * somma esame.crediti()==m
+  * media esame.voto() sia max
+  
+ APPROCCIO 1 (il più stupido)
+ ad ogni livello dellaricorsione, aggiungo un esame -> devo decidere quale, 
+ li provo tutti 
+ 
+ SOLUZIONE PARZIALE 
+  Parziale = sottoinsiem di esattamente L elementi 
+ - Generazione SOLUZIONE PARZIALE 
+  per tutti icasi che non ho ancora considerato (tutti gli esami non ancora 
+  compresi in parziale): 
+  * provo ad aggiungere
+  * faccio andare avanti la ricorsione
+  * faccio backtracking
+  
+  L=0 -> ho N scelte possibili 
+   PARZIALE = {e1}
+      L=1 
+         PARZIALE={e1,e2}
+         PARZIALE= {e1,e3}
+         [...]
+   PARZIALE = {e2}
+         PARZIALE={e1,e2}
+         [...]
+   [...]
+   PARZIALE= {en}
+   
+ - CASI TERMINALI
+   
+   L= PARTENZA.size() -> non ci sono più esami da aggiungere
+   Controllo solzuione parziale: 
+      * se PARZIALE.sommaCrediti()==m
+        - se PARZIALE.media > di tutte le medie viste finora -> tengo traccia
+      * se PARZIALE.sommaCrediti()!= m 
+        - abbandono la ricorsione
+        
+    PARZIALE.sommaCrediti()>= m -> mi fermo subito!
+      * se > m -> scarto parziale e non vado avanti
+      * se = m -> controllo soluzione parziale
+      
+ APPROCCIO 2
+ 
+ -LIVELLO DELLA RICORSIONE(L)
+    -> indica quale corso sto decidendo di mettere o non mettere nella ricorsione
+    
+    supponiamo di vare PARTEMZA = {e1,e2,e3,...,en}
+    L=0 -> considero e1
+     * lo metto -> PARZIALE ={e1}
+        L =1 -> considero e2
+         * lo metto -> PARZIALE ={e1,e2}
+         * non lo metto -> PARZIALE = {e1}
+          
+     * non lo metto -> PARZIALE = {}
+      
+ 
